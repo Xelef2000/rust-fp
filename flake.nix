@@ -97,7 +97,7 @@
               ];
             }
           );
-        linux-pam = pkgs.linux-pam
+        linux-pam = pkgs.linux-pam;
         in
         {
           systemd.services.rust-fp-dbus-interface = {
