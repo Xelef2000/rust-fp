@@ -115,12 +115,22 @@
             account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
           '';
 
-          # security.pam.services.gdm-fingerprint.text = '''
-          #   auth    sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
-          #   account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
-          #   password sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
-          #   session sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
-          # '';
+          security.pam.services.gdm-rs-fingerprint.text = '''
+            auth        required                                     pam_env.so
+            auth        [success=done default=bad]                   pam_fprintd.so
+            auth        required                                     pam_deny.so
+
+            account     required                                     pam_unix.so
+            account     required                                     pam_permit.so
+
+            password    required                                     pam_deny.so
+
+            session     optional                                     pam_keyinit.so revoke
+            session     required                                     pam_limits.so
+            -session    optional                                     pam_systemd.so
+            session     [success=1 default=ignore]                   pam_succeed_if.so service in crond quiet use_uid
+            session     required                                     pam_unix.so
+                      '';
 
           environment.systemPackages = [
             rust-fp-dbus-interface-config
