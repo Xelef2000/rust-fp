@@ -116,7 +116,7 @@
             account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
           '';
 
-          security.pam.services.gdm-rs-fingerprint.text = '''
+          security.pam.services.gdm-rs-fingerprint.text = ''
             auth        required                                     ${linux-pam}/lib/security/pam_env.so
             auth        [success=done default=bad]                   ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
             auth        required                                     ${linux-pam}/lib/security/pam_deny.so
