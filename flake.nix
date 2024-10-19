@@ -98,6 +98,8 @@
             }
           );
         linux-pam = pkgs.linux-pam;
+        gdm = pkgs.gnome.gdm;
+        gnome-keyring = pkgs.gnome.gnome-keyring;
         in
         {
           systemd.services.rust-fp-dbus-interface = {
@@ -116,21 +118,21 @@
             account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
           '';
 
-          security.pam.services.gdm-rs-fingerprint.text = ''
-            auth        required                                     ${linux-pam}/lib/security/pam_env.so
-            auth        [success=done default=bad]                   ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
-            auth        required                                     ${linux-pam}/lib/security/pam_deny.so
+          security.pam.services.gdm-fingerprint.text = ''
+            auth       required                    pam_shells.so
+            auth       requisite                   pam_nologin.so
+            auth       requisite                   pam_faillock.so      preauth
+            auth       required                    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
+            auth       required                    pam_env.so
+            auth       [success=ok default=1]      ${gdm}/lib/security/pam_gdm.so
+            auth       optional                    ${gnome-keyring}/lib/security/pam_gnome_keyring.so
 
-            account     required                                     ${linux-pam}/lib/security/pam_unix.so
-            account     required                                     ${linux-pam}/lib/security/pam_permit.so
 
-            password    required                                     ${linux-pam}/lib/security/pam_deny.so
+            account    include                     login
 
-            session     optional                                     ${linux-pam}/lib/security/pam_keyinit.so revoke
-            session     required                                     ${linux-pam}/lib/security/pam_limits.so
-            -session    optional                                     ${linux-pam}/lib/security/pam_systemd.so
-            session     [success=1 default=ignore]                   ${linux-pam}/lib/security/pam_succeed_if.so service in crond quiet use_uid
-            session     required                                     ${linux-pam}/lib/security/pam_unix.so
+            password   required                    pam_deny.so
+
+            session    include                     login
                       '';
 
           environment.systemPackages = [
