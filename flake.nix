@@ -115,12 +115,12 @@
             account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
           '';
 
-          security.pam.services.gdm-fingerprint.text = '''
-            auth    sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
-            account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
-            password sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
-            session sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
-          '';
+          # security.pam.services.gdm-fingerprint.text = '''
+          #   auth    sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
+          #   account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
+          #   password sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
+          #   session sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
+          # '';
 
           environment.systemPackages = [
             rust-fp-dbus-interface-config
