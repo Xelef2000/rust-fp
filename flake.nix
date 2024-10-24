@@ -125,6 +125,7 @@
 
           security.pam.services.sudo.text = ''
             auth    sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
+            account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
           '';
 
 
