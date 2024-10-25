@@ -123,15 +123,10 @@
           #   account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
           # '';
 
-          #login userdel  vlock  
-          # chpasswd  cups  gdm-fingerprint  gdm-password            groupdel  groupmod   i3lock-color  other  polkit-1  runuser-l  sudo  useradd       usermod  xlock
-
           security.pam.services.login.text = ''
             auth    sufficient    ${rust-fp-pam-module}/lib/libpam_sober.so
             account sufficient    ${rust-fp-pam-module}/lib/libpam_sober.so
           '';
-
-          
 
 
 
