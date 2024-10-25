@@ -1,18 +1,12 @@
 [package]
-name = "rust-fp-pam-module"
+name = "pam-sober"
 version = "0.1.0"
-edition = "2021"
+authors = ["Anthony Nowell <anowell@gmail.com>"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
+name = "pam_sober"
 crate-type = ["cdylib"]
 
 [dependencies]
-rust-fp-common = { path = "../common" }
-pam-bindings = "0.1.1"
-pollster = "0.3.0"
-postcard = "1.0.8"
-rand = "0.8.5"
-rust-fp = { path = "../rust-fp" }
-zbus = "4.3.0"
-ctrlc = { version = "3.4.4", features = ["termination"] }
+pam-bindings = { path = "../pam/" }
+rand = "0.8.4"

@@ -112,10 +112,10 @@
             wantedBy = [ "multi-user.target" ];
           };
 
-          # Example: https://github.com/NixOS/nixpkgs/issues/239770#issuecomment-1608589113
-          security.pam.services.kde-fingerprint.text = ''
-            auth    sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
-            account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
+          # # Example: https://github.com/NixOS/nixpkgs/issues/239770#issuecomment-1608589113
+          # security.pam.services.kde-fingerprint.text = ''
+          #   auth    sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
+          #   account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
           '';
 
           # security.pam.services.gdm-fingerprint.text = ''
@@ -123,10 +123,10 @@
           #   account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
           # '';
 
-          # security.pam.services.sudo.text = ''
-          #   auth    sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
-          #   account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
-          # '';
+          security.pam.services.su.text = ''
+            auth    sufficient    ${rust-fp-pam-module}/lib/pam_sober.so
+            account sufficient    ${rust-fp-pam-module}/lib/pam_sober.so
+          '';
 
 
 
