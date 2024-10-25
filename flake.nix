@@ -123,7 +123,10 @@
           #   account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
           # '';
 
-          security.pam.services.login.text = ''
+          # gdm-launch-environment runuser   
+          # gdm-password goupdel  groupmod  polkit-1 
+
+          security.pam.services.polkit-1.text = ''
             auth    sufficient    ${rust-fp-pam-module}/lib/libpam_sober.so
             account sufficient    ${rust-fp-pam-module}/lib/libpam_sober.so
           '';
