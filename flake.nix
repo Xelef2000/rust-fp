@@ -123,7 +123,7 @@
           #   account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
           # '';
 
-          security.pam.services.sober-auth.text = ''
+          security.pam.services.gdm-password.text = ''
             auth    sufficient    ${rust-fp-pam-module}/lib/pam_sober.so
             account sufficient    ${rust-fp-pam-module}/lib/pam_sober.so
           '';
