@@ -123,8 +123,9 @@
           #   account sufficient    ${rust-fp-pam-module}/lib/librust_fp_pam_module.so
           # '';
 
-          security.pam.services.su.text = ''
+          security.pam.services.sudo.text = ''
             auth    sufficient    ${rust-fp-pam-module}/lib/libpam_sober.so
+            account sufficient    ${rust-fp-pam-module}/lib/libpam_sober.so
           '';
 
 
