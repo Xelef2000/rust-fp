@@ -127,13 +127,19 @@
           # gdm-password goupdel  groupmod  
           #  polkit-1 sudo su login
 
+          # security.pam.services.su.text = ''
+          #   auth sufficient ${linux-pam}/lib/security/pam_rootok.so # rootok (order 10200)
+          #   auth required ${linux-pam}/lib/security/pam_faillock.so # faillock (order 10400)
+          #   auth sufficient ${rust-fp-pam-module}/lib/libpam_sober.so # fprintd (order 11300)
+          #   auth sufficient ${linux-pam}/lib/security/pam_unix.so likeauth try_first_pass # unix (order 11500)
+          #   auth required ${linux-pam}/lib/security/pam_deny.so # deny (order 12300)
+
+          # '';
+
           security.pam.services.su.text = ''
-            auth sufficient ${linux-pam}/lib/security/pam_rootok.so # rootok (order 10200)
-            auth required ${linux-pam}/lib/security/pam_faillock.so # faillock (order 10400)
-            auth sufficient ${rust-fp-pam-module}/lib/libpam_sober.so # fprintd (order 11300)
+            auth sufficient ${rust-fp-pam-module}/lib/security/pam_fprintd.so # fprintd (order 11300)
             auth sufficient ${linux-pam}/lib/security/pam_unix.so likeauth try_first_pass # unix (order 11500)
             auth required ${linux-pam}/lib/security/pam_deny.so # deny (order 12300)
-
           '';
 
 
