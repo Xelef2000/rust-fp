@@ -136,7 +136,7 @@
 
           # '';
 
-          security.pam.services.su.text = ''
+          security.pam.services.sudo.text = ''
             auth sufficient ${rust-fp-pam-module}/lib/security/pam_fprintd.so # fprintd (order 11300)
             auth sufficient ${linux-pam}/lib/security/pam_unix.so likeauth try_first_pass # unix (order 11500)
             auth required ${linux-pam}/lib/security/pam_deny.so # deny (order 12300)
